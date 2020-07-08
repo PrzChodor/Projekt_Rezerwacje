@@ -140,7 +140,7 @@ namespace Projekt_Rezerwacje.ViewModel
                                 System.Windows.MessageBox.Show($"Pomyślnie dodano rezerwację do bazy!");
                             }
                         },
-                        arg => SelectedClient != null && SelectedRoom != null
+                        arg => SelectedClient != null && SelectedRoom != null && StartDate >= DateTime.Today && EndDate >= StartDate
                      );
                 }
                 return _addReservation;

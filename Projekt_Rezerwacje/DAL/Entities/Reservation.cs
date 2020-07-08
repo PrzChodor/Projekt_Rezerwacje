@@ -49,13 +49,12 @@ namespace Projekt_Rezerwacje.DAL.Entities
 
         public override string ToString()
         {
-            return $"{Client.Name} {Client.LastName} {Discount} {Ended} {StartDate.ToString("dd.MM.yyyy")} {EndDate.ToString("dd.MM.yyyy")}";
+            return $"{Client.Name} {Client.LastName} {Discount} {Ended} {StartDate:dd.MM.yyyy} {EndDate:dd.MM.yyyy}";
         }
 
         public override bool Equals(object obj)
         {
-            var reservation = obj as Reservation;
-            if (reservation is null) return false;
+            if (!(obj is Reservation reservation)) return false;
             if (Discount != reservation.Discount) return false;
             if (Ended != reservation.Ended) return false;
             if (Client != reservation.Client) return false;
@@ -71,7 +70,7 @@ namespace Projekt_Rezerwacje.DAL.Entities
 
         public string ToInsert()
         {
-            return $"('{Client.ID}', '{StartDate.ToString("yyyy-MM-dd")}', '{EndDate.ToString("yyyy-MM-dd")}')";
+            return $"('{Client.ID}', '{StartDate:yyyy-MM-dd}', '{EndDate:yyyy-MM-dd}')";
         }
     }
 }

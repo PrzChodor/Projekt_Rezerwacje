@@ -13,7 +13,7 @@ namespace Projekt_Rezerwacje.ViewModel
 
     class ClientsTab : ViewModelBase
     {
-        private Model model = new Model();
+        private Model model = null;
         public ObservableCollection<Client> ListOfClients { get; set; }
 
         public ClientsTab(Model model)

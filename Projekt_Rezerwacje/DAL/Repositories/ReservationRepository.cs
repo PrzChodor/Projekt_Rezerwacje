@@ -56,9 +56,9 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             using (var connection = DBConnection.Instance.Connection)
             {
                 string DATES_IN_RANGE = $"SELECT COUNT(*) FROM rezerwacje, pokoje_rezerwacje WHERE " +
-                    $"((od BETWEEN '{reservation.StartDate.ToString("yyyy-MM-dd")}'  AND '{reservation.EndDate.ToString("yyyy-MM-dd")}')  OR " +
-                    $"(do BETWEEN '{reservation.StartDate.ToString("yyyy-MM-dd")}'  AND '{reservation.EndDate.ToString("yyyy-MM-dd")}')  OR " +
-                    $"('{reservation.StartDate.ToString("yyyy-MM-dd")}' BETWEEN od and do )) AND " +
+                    $"((od BETWEEN '{reservation.StartDate:yyyy-MM-dd}'  AND '{reservation.EndDate:yyyy-MM-dd}')  OR " +
+                    $"(do BETWEEN '{reservation.StartDate:yyyy-MM-dd}'  AND '{reservation.EndDate:yyyy-MM-dd}')  OR " +
+                    $"('{reservation.StartDate:yyyy-MM-dd}' BETWEEN od and do )) AND " +
                     $"rezerwacje.id_r = pokoje_rezerwacje.id_r AND pokoje_rezerwacje.id_p = {id_p}";
 
                 MySqlCommand command = new MySqlCommand(DATES_IN_RANGE, connection);
