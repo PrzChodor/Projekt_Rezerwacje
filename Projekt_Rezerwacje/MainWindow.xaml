@@ -100,7 +100,7 @@
                             </ListView.View>
                         </ListView>
                         <Button x:Name="ButtonAdd" Grid.Row="1" Grid.Column="0" Content="Dodaj" Margin="5" Command="{Binding ReservationsTabVM.AddReservation}"/>
-                        <Button x:Name="ButtonEdit" Grid.Row="1" Grid.Column="1" Content="Edytuj" Margin="5"/>
+                        <Button x:Name="ButtonEdit" Grid.Row="1" Grid.Column="1" Content="Zakończ" Margin="5" Command="{Binding ReservationsTabVM.FinishReservations}"/>
                         <Button x:Name="ButtonDelete" Grid.Row="1" Grid.Column="2" Content="Usuń" Margin="5" Command="{Binding ReservationsTabVM.DeleteReservation}"/>
                     </Grid>
                 </Grid>
