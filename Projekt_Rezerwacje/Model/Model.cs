@@ -112,6 +112,8 @@ namespace Projekt_Rezerwacje.Model
                     return true;
                 }
             }
+            else
+                System.Windows.MessageBox.Show($"Rezerwacja jest już w bazie!");
             return false;
         }
         public bool DeleteReservation(Reservation reservation, int reservationID)

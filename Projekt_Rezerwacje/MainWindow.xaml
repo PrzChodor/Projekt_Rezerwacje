@@ -83,15 +83,9 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <ListBox x:Name="ListBoxRezerwacje" Grid.ColumnSpan="3" Grid.Row="0" Margin="5" ItemsSource="{Binding ReservationsTabVM.ListOfReservations}"/>
-                        <ListView x:Name="ReservationListView" Grid.ColumnSpan="3" ItemsSource="{Binding ReservationsTabVM.ListOfReservations, Mode=TwoWay}" 
-                                  SelectedItem="{Binding ReservationsTabVM.SelectedReservation}" SelectedIndex="{Binding ReservationsTabVM.SelectedID, Mode=TwoWay }">
+                        <ListView x:Name="ReservationListView" Grid.ColumnSpan="3" ItemsSource="{Binding ReservationsTabVM.ListOfReservations}" 
+                                  SelectedItem="{Binding ReservationsTabVM.SelectedReservation}" SelectedIndex="{Binding ReservationsTabVM.SelectedID, Mode=TwoWay }" SelectionChanged="ReservationListView_SelectionChanged">
 
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding ReservationsTabVM.LoadReservation}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            
                             <ListView.View>
                                 <GridView>
                                     <GridView.Columns>
@@ -99,14 +93,14 @@
                                         <GridViewColumn DisplayMemberBinding="{Binding Path=Client.LastName}" Header="Nazwisko" Width="100"/>
                                         <GridViewColumn DisplayMemberBinding="{Binding Path=Discount}" Header="Zniżka" Width="70"/>
                                         <GridViewColumn DisplayMemberBinding="{Binding Path=Ended}" Header="Zakończono" Width="90"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=StartDate, StringFormat=d}" Header="Od" Width="70"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=EndDate, StringFormat=d}" Header="Do" Width="70"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=StartDate, StringFormat='{}{0:dd.MM.yyyy}'}" Header="Od" Width="75"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=EndDate, StringFormat='{}{0:dd.MM.yyyy}'}" Header="Do" Width="75"/>
                                     </GridView.Columns>
                                 </GridView>
                             </ListView.View>
                         </ListView>
                         <Button x:Name="ButtonAdd" Grid.Row="1" Grid.Column="0" Content="Dodaj" Margin="5" Command="{Binding ReservationsTabVM.AddReservation}"/>
-                        <Button x:Name="ButtonZakoncz" Grid.Row="1" Grid.Column="1" Content="Zakończ" Margin="5" Command="{Binding ReservationsTabVM.FinishReservations}"/>
+                        <Button x:Name="ButtonEdit" Grid.Row="1" Grid.Column="1" Content="Edytuj" Margin="5"/>
                         <Button x:Name="ButtonDelete" Grid.Row="1" Grid.Column="2" Content="Usuń" Margin="5" Command="{Binding ReservationsTabVM.DeleteReservation}"/>
                     </Grid>
                 </Grid>
