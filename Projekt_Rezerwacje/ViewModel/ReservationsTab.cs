@@ -139,8 +139,6 @@ namespace Projekt_Rezerwacje.ViewModel
                             {
                                 System.Windows.MessageBox.Show($"Pomyślnie dodano rezerwację do bazy!");
                             }
-                            else
-                                System.Windows.MessageBox.Show($"Rezerwacja jest już w bazie!");
                         },
                         arg => SelectedClient != null && SelectedRoom != null
                      );
