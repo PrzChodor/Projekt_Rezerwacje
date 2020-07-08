@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Projekt_Rezerwacje.DAL.Repositories
 {
     using DAL.Entities;
+    using System.Windows;
 
     class ReservationRepository
     {
@@ -43,7 +44,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
                 connection.Open();
                 var n = command.ExecuteNonQuery();
                 if (n == 2) state = true;
-
+                MessageBox.Show(DELETE_RESERVATION);
                 connection.Close();
             }
             return state;
@@ -66,7 +67,6 @@ namespace Projekt_Rezerwacje.DAL.Repositories
                 connection.Open();
                 var id = command.ExecuteNonQuery();
                 state = true;
-                reservation.ID = (int)command.LastInsertedId;
                 connection.Close();
             }
             return state;

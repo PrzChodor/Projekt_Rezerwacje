@@ -138,7 +138,6 @@ namespace Projekt_Rezerwacje.ViewModel
                             if (model.AddReservation(reservation, (int)SelectedRoom.ID))
                             {
                                 System.Windows.MessageBox.Show($"Pomyślnie dodano rezerwację do bazy!");
-                                //ClearClient();
                             }
                             else
                                 System.Windows.MessageBox.Show($"Rezerwacja jest już w bazie!");

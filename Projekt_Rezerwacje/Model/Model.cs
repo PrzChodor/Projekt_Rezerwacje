@@ -77,7 +77,7 @@ namespace Projekt_Rezerwacje.Model
             return false;
         }
 
-        internal bool DeleteClient(Client client, int clientID)
+        public bool DeleteClient(Client client, int clientID)
         {
             if (IsClientInDataBase(client))
             {
@@ -114,7 +114,7 @@ namespace Projekt_Rezerwacje.Model
             }
             return false;
         }
-        internal bool DeleteReservation(Reservation reservation, int reservationID)
+        public bool DeleteReservation(Reservation reservation, int reservationID)
         {
             if (IsReservationInDataBase(reservation))
             {
