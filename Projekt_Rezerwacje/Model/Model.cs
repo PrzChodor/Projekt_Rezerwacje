@@ -137,11 +137,15 @@ namespace Projekt_Rezerwacje.Model
                 {
                     if (Reservations[i].ID == reservationID && Reservations[i].Ended == "F")
                     {
-                        Reservations[i].Ended = "T";
+                        reservation.Ended = "T";
+                        Reservations.RemoveAt(i);
+                        Reservations.Insert(i, reservation);
                     }
                     else if(Reservations[i].ID == reservationID)
                     {
                         Reservations[i].Ended = "F";
+                        Reservations.RemoveAt(i);
+                        Reservations.Insert(i, reservation);
                     }
                 }
                 return true;

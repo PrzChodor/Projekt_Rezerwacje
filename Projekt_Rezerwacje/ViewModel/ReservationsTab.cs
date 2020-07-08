@@ -183,7 +183,7 @@ namespace Projekt_Rezerwacje.ViewModel
                             if (model.FinishReservation(SelectedReservation, (int)SelectedReservation.ID))
                             {
                                 System.Windows.MessageBox.Show($"Pomyślnie zakończono rezerwację!");
-                                onPropertyChanged(SelectedReservation.Ended);
+                                onPropertyChanged(nameof(SelectedReservation.Ended));
                                 SelectedID = -1;
                               
                             }
