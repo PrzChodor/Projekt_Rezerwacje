@@ -24,10 +24,5 @@ namespace Projekt_Rezerwacje
         {
             InitializeComponent();
         }
-
-        private void ReservationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

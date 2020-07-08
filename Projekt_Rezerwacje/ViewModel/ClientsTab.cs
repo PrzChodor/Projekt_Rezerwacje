@@ -147,7 +147,6 @@ namespace Projekt_Rezerwacje.ViewModel
         private ICommand _loadClient = null;
         public ICommand LoadClient
         {
-
             get
             {
                 if (_loadClient == null)

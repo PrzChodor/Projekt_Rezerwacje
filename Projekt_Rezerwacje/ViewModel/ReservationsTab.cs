@@ -30,7 +30,6 @@ namespace Projekt_Rezerwacje.ViewModel
         public Room SelectedRoom { get; set; }
         public Reservation SelectedReservation { get; set; }
 
-
         private int selectedID = -1;
         public int SelectedID
         {
@@ -170,28 +169,26 @@ namespace Projekt_Rezerwacje.ViewModel
             }
         }
 
-        private ICommand _finishReservations = null;
-        public ICommand FinishReservations
+        private ICommand _endReservation = null;
+        public ICommand EndReservation
         {
             get
             {
-                if (_finishReservations == null)
+                if (_endReservation == null)
                 {
-                    _finishReservations = new RelayCommand(
+                    _endReservation = new RelayCommand(
                         arg => 
                         {
-                            if (model.FinishReservation(SelectedReservation, (int)SelectedReservation.ID))
+                            if (model.EndReservation(SelectedReservation))
                             {
                                 System.Windows.MessageBox.Show($"Pomyślnie zakończono rezerwację!");
-                                onPropertyChanged(SelectedReservation.Ended);
                                 SelectedID = -1;
-                              
                             }
                         },
-                        arg => SelectedReservation != null
+                        arg => SelectedID > -1
                      );
                 }
-                return _finishReservations;
+                return _endReservation;
             }
         }
     }

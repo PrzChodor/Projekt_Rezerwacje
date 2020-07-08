@@ -84,7 +84,8 @@
                         </Grid.RowDefinitions>
                         <ListBox x:Name="ListBoxRezerwacje" Grid.ColumnSpan="3" Grid.Row="0" Margin="5" ItemsSource="{Binding ReservationsTabVM.ListOfReservations}"/>
                         <ListView x:Name="ReservationListView" Grid.ColumnSpan="3" ItemsSource="{Binding ReservationsTabVM.ListOfReservations}" 
-                                  SelectedItem="{Binding ReservationsTabVM.SelectedReservation}" SelectedIndex="{Binding ReservationsTabVM.SelectedID, Mode=TwoWay }" SelectionChanged="ReservationListView_SelectionChanged">
+                                  SelectedItem="{Binding ReservationsTabVM.SelectedReservation, Mode=TwoWay }" 
+                                  SelectedIndex="{Binding ReservationsTabVM.SelectedID, Mode=TwoWay }">
 
                             <ListView.View>
                                 <GridView>
@@ -100,7 +101,7 @@
                             </ListView.View>
                         </ListView>
                         <Button x:Name="ButtonAdd" Grid.Row="1" Grid.Column="0" Content="Dodaj" Margin="5" Command="{Binding ReservationsTabVM.AddReservation}"/>
-                        <Button x:Name="ButtonEdit" Grid.Row="1" Grid.Column="1" Content="Zakończ" Margin="5" Command="{Binding ReservationsTabVM.FinishReservations}"/>
+                        <Button x:Name="ButtonEdit" Grid.Row="1" Grid.Column="1" Content="Zakończ" Margin="5" Command="{Binding ReservationsTabVM.EndReservation}"/>
                         <Button x:Name="ButtonDelete" Grid.Row="1" Grid.Column="2" Content="Usuń" Margin="5" Command="{Binding ReservationsTabVM.DeleteReservation}"/>
                     </Grid>
                 </Grid>

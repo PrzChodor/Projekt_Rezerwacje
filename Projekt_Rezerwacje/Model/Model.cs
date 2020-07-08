@@ -129,19 +129,21 @@ namespace Projekt_Rezerwacje.Model
             return false;
         }
 
-        public bool FinishReservation(Reservation reservation, int reservationID)
+        public bool EndReservation(Reservation reservation)
         {
-            if (ReservationRepository.FinishReservation(reservationID))
+            if (ReservationRepository.EndReservation((int)reservation.ID))
             {
                 for (int i = 0; i < Reservations.Count; i++)
                 {
-                    if (Reservations[i].ID == reservationID && Reservations[i].Ended == "F")
+                    if (Reservations[i].ID == reservation.ID)
                     {
-                        Reservations[i].Ended = "T";
-                    }
-                    else if(Reservations[i].ID == reservationID)
-                    {
-                        Reservations[i].Ended = "F";
+                        if (reservation.Ended == "F")
+                            reservation.Ended = "T";
+                        else
+                            reservation.Ended = "F";
+
+                        Reservations.RemoveAt(i);
+                        Reservations.Insert(i, reservation);
                     }
                 }
                 return true;

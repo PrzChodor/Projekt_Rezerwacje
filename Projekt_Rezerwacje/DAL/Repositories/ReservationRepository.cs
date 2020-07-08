@@ -92,7 +92,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             return state;
         }
 
-        public static bool FinishReservation(int reservationID)
+        public static bool EndReservation(int reservationID)
         {
             bool state = false; 
             using (var connection = DBConnection.Instance.Connection)
