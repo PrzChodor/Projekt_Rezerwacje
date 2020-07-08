@@ -91,5 +91,22 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             }
             return state;
         }
+
+        public static bool FinishReservation(int reservationID)
+        {
+            bool state = false; 
+            using (var connection = DBConnection.Instance.Connection)
+            {
+                string FINISH_RESERVATION = $"UPDATE rezerwacje SET zakończono = IF(zakończono='F','T','F') WHERE id_r={reservationID}";
+
+                MySqlCommand command = new MySqlCommand(FINISH_RESERVATION, connection);
+                connection.Open();
+                var n = command.ExecuteNonQuery();
+                if (n == 1) state = true;
+
+                connection.Close();
+            }
+            return state;
+        }
     }
 }

@@ -128,5 +128,25 @@ namespace Projekt_Rezerwacje.Model
             }
             return false;
         }
+
+        public bool FinishReservation(Reservation reservation, int reservationID)
+        {
+            if (ReservationRepository.FinishReservation(reservationID))
+            {
+                for (int i = 0; i < Reservations.Count; i++)
+                {
+                    if (Reservations[i].ID == reservationID && Reservations[i].Ended == "F")
+                    {
+                        Reservations[i].Ended = "T";
+                    }
+                    else if(Reservations[i].ID == reservationID)
+                    {
+                        Reservations[i].Ended = "F";
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }

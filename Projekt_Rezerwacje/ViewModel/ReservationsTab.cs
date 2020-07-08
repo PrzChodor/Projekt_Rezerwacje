@@ -169,5 +169,30 @@ namespace Projekt_Rezerwacje.ViewModel
                 return _deleteReservation;
             }
         }
+
+        private ICommand _finishReservations = null;
+        public ICommand FinishReservations
+        {
+            get
+            {
+                if (_finishReservations == null)
+                {
+                    _finishReservations = new RelayCommand(
+                        arg => 
+                        {
+                            if (model.FinishReservation(SelectedReservation, (int)SelectedReservation.ID))
+                            {
+                                System.Windows.MessageBox.Show($"Pomyślnie zakończono rezerwację!");
+                                onPropertyChanged(SelectedReservation.Ended);
+                                SelectedID = -1;
+                              
+                            }
+                        },
+                        arg => SelectedReservation != null
+                     );
+                }
+                return _finishReservations;
+            }
+        }
     }
 }
