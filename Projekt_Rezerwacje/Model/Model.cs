@@ -14,13 +14,14 @@ namespace Projekt_Rezerwacje.Model
 
     class Model
     {
+        #region Properties
         public ObservableCollection<Room> Rooms { get; set; } = new ObservableCollection<Room>();
         public ObservableCollection<Reservation> Reservations { get; set; } = new ObservableCollection<Reservation>();
         public ObservableCollection<Client> Clients { get; set; } = new ObservableCollection<Client>();
         public ObservableCollection<Client> SearchedClients { get; set; } = new ObservableCollection<Client>();
         public string SearchedClient { get; set; }
+        #endregion
 
-      
         public Model()
         {
             var clients = ClientRepository.GetClients();
@@ -28,6 +29,8 @@ namespace Projekt_Rezerwacje.Model
                 Clients.Add(c);
         }
 
+        #region Methods
+        //Zwraca wszystkie pokoje w danym hotelu i o podanym standardzie 
         public void GetRooms(int id_h, string package)
         {
             Rooms.Clear();
@@ -36,6 +39,7 @@ namespace Projekt_Rezerwacje.Model
                 Rooms.Add(r);
         }
 
+        //Wyszukuje klientów których nazwisko zawiera wyrażenie
         public void SearchForClient(string SearchedClient)
         {
             SearchedClients.Clear();
@@ -44,9 +48,10 @@ namespace Projekt_Rezerwacje.Model
                 SearchedClients.Add(c);
         }
 
+        //Sprawdza czy klient jest w bazie
         public bool IsClientInDataBase(Client client) => Clients.Contains(client);
 
-
+        //Dodaje klientów do bazy
         public bool AddClient(Client client)
         {
             if (!IsClientInDataBase(client))
@@ -60,6 +65,7 @@ namespace Projekt_Rezerwacje.Model
             return false;    
         }
 
+        //Zmienia dane klienta w bazie
         public bool EditClient(Client client, int clientID)
         {
             if (ClientRepository.EditClient(client, clientID))
@@ -77,6 +83,7 @@ namespace Projekt_Rezerwacje.Model
             return false;
         }
 
+        //Usuwa klienta z bazy
         public bool DeleteClient(Client client, int clientID)
         {
             if (IsClientInDataBase(client))
@@ -90,8 +97,10 @@ namespace Projekt_Rezerwacje.Model
             return false;
         }
 
+        //Sprawdza czy rezerwacja jest w bazie
         public bool IsReservationInDataBase(Reservation reservation) => Reservations.Contains(reservation);
 
+        //Zwraca rezerwacje dotyczące danego pokoju
         public void GetReservations(int id_p)
         {
             Reservations.Clear();
@@ -102,6 +111,7 @@ namespace Projekt_Rezerwacje.Model
             }
         }
 
+        //Dodaje rezerwacje do bazy
         public bool AddReservation(Reservation reservation, int id_p)
         {
             if (!IsReservationInDataBase(reservation))
@@ -116,6 +126,8 @@ namespace Projekt_Rezerwacje.Model
                 System.Windows.MessageBox.Show($"Rezerwacja jest już w bazie!");
             return false;
         }
+
+        //Usuwa daną rezerwację z bazy danych
         public bool DeleteReservation(Reservation reservation, int reservationID)
         {
             if (IsReservationInDataBase(reservation))
@@ -129,6 +141,7 @@ namespace Projekt_Rezerwacje.Model
             return false;
         }
 
+        //Kończy daną rezerwację
         public bool EndReservation(Reservation reservation)
         {
             if (ReservationRepository.EndReservation((int)reservation.ID))
@@ -150,5 +163,6 @@ namespace Projekt_Rezerwacje.Model
             }
             return false;
         }
+        #endregion
     }
 }

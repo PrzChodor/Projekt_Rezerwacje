@@ -10,6 +10,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
     using DAL.Entities;
     class RoomRepository
     {
+        //Wybranie wszystkich pokoi w danym hotelu i o podanym standardzie 
         public static List<Room> GetRooms(int id_h, string package)
         {
             List<Room> rooms = new List<Room>();

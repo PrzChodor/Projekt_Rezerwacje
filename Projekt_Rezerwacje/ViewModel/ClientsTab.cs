@@ -14,6 +14,8 @@ namespace Projekt_Rezerwacje.ViewModel
     class ClientsTab : ViewModelBase
     {
         private Model model = null;
+
+        #region Properties
         public ObservableCollection<Client> ListOfClients { get; set; }
 
         public ClientsTab(Model model)
@@ -67,7 +69,9 @@ namespace Projekt_Rezerwacje.ViewModel
                 onPropertyChanged(nameof(SelectedID));
             }
         }
+        #endregion
 
+        #region Commands
         private ICommand _addClient = null;
         public ICommand AddClient
         {
@@ -170,6 +174,7 @@ namespace Projekt_Rezerwacje.ViewModel
                 return _loadClient;
             }
         }
+        #endregion
 
         public void ClearClient()
         {

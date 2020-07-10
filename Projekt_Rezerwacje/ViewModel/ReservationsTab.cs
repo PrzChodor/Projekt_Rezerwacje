@@ -18,6 +18,7 @@ namespace Projekt_Rezerwacje.ViewModel
     {
         private Model model = null;
 
+        #region Properties
         public List<Hotel> ListOfHotels { get; set; }
         public ObservableCollection<Reservation> ListOfReservations { get; set; }
         public ObservableCollection<Client> ListOfClients { get; set; }
@@ -41,17 +42,6 @@ namespace Projekt_Rezerwacje.ViewModel
             }
         }
 
-        public ReservationsTab(Model model)
-        {
-            this.model = model;
-            ListOfClients = model.SearchedClients;
-            ListOfHotels = HotelRepository.GetHotels();
-            ListOfReservations = model.Reservations;
-            ListOfRooms = model.Rooms;
-            StartDate = DateTime.Today;
-            EndDate = DateTime.Today;
-        }
-
         private DateTime startDate;
         public DateTime StartDate
         {
@@ -73,7 +63,20 @@ namespace Projekt_Rezerwacje.ViewModel
                 onPropertyChanged(nameof(EndDate));
             }
         }
+        #endregion
 
+        public ReservationsTab(Model model)
+        {
+            this.model = model;
+            ListOfClients = model.SearchedClients;
+            ListOfHotels = HotelRepository.GetHotels();
+            ListOfReservations = model.Reservations;
+            ListOfRooms = model.Rooms;
+            StartDate = DateTime.Today;
+            EndDate = DateTime.Today;
+        }
+
+        #region Commands
         private ICommand _searchClient = null;
         public ICommand SearchClient
         {
@@ -191,5 +194,6 @@ namespace Projekt_Rezerwacje.ViewModel
                 return _endReservation;
             }
         }
+        #endregion
     }
 }

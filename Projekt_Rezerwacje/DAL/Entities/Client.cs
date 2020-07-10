@@ -9,11 +9,14 @@ namespace Projekt_Rezerwacje.DAL.Entities
 {
     class Client
     {
+        #region Properties
         public int? ID { set; get; }
         public string Name { set; get; }
         public string LastName { set; get; }
         public string PhoneNumber { set; get; }
+        #endregion
 
+        #region Constructors
         public Client(MySqlDataReader reader)
         {
             ID = int.Parse(reader["id_k"].ToString());
@@ -37,7 +40,9 @@ namespace Projekt_Rezerwacje.DAL.Entities
             LastName = client.LastName;
             PhoneNumber = client.PhoneNumber;
         }
+        #endregion
 
+        #region Methods
         public override string ToString()
         {
             return $"{Name} {LastName} {PhoneNumber}";
@@ -63,6 +68,7 @@ namespace Projekt_Rezerwacje.DAL.Entities
         {
             return base.GetHashCode();
         }
+        #endregion
     }
 }
 

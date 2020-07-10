@@ -12,6 +12,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
     {
         private const string ALL_HOTELS = "SELECT * FROM hotele";
 
+        //Zwraca wszystkie hotele w bazie
         public static List<Hotel> GetHotels()
         {
             List<Hotel> hotels = new List<Hotel>();

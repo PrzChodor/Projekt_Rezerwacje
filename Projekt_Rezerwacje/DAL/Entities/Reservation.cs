@@ -9,14 +9,16 @@ namespace Projekt_Rezerwacje.DAL.Entities
 {
     class Reservation
     {
-
+        #region Properties
         public int? ID { set; get; }
         public string Discount { set; get; }
         public string Ended { set; get; }
         public Client Client { set; get; }
         public DateTime StartDate { set; get; }
         public DateTime EndDate { set; get; }
+        #endregion
 
+        #region Constructors
         public Reservation(MySqlDataReader reader)
         {
             ID = int.Parse(reader["id_r"].ToString());
@@ -46,7 +48,9 @@ namespace Projekt_Rezerwacje.DAL.Entities
             StartDate = reservation.StartDate;
             EndDate = reservation.EndDate;
         }
+        #endregion
 
+        #region Methods
         public override string ToString()
         {
             return $"{Client.Name} {Client.LastName} {Discount} {Ended} {StartDate:dd.MM.yyyy} {EndDate:dd.MM.yyyy}";
@@ -72,5 +76,6 @@ namespace Projekt_Rezerwacje.DAL.Entities
         {
             return $"('{Client.ID}', '{StartDate:yyyy-MM-dd}', '{EndDate:yyyy-MM-dd}')";
         }
+        #endregion
     }
 }

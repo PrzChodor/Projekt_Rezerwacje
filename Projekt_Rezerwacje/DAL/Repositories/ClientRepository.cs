@@ -13,6 +13,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
         private const string ALL_CLIENTS = "SELECT * FROM klienci";
         private const string ADD_CLIENT = "INSERT INTO `klienci`(`imię`, `nazwisko`, `telefon`) VALUES ";
 
+        //Zwraca wszystkich klientów z bazy
         public static List<Client> GetClients()
         {
             List<Client> clients = new List<Client>();
@@ -28,6 +29,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             return clients;
         }
 
+        //Dodaje danego klienta do bazy
         public static bool AddClient(Client client)
         {
             bool state = false;
@@ -43,7 +45,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             return state;
         }
 
-
+        //Zmienia dane klienta o podanym id
         public static bool EditClient(Client client, int clientID)
         {
             bool state = false;
@@ -62,6 +64,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             return state;
         }
 
+        //Usuwa klienta o podanym id
         public static bool DeleteClient(int clientID)
         {
             bool state = false;
@@ -79,6 +82,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             return state;
         }
 
+        //Wyszukuje klientów o nazwisku zawierającym podane wyrażenie
         public static List<Client> SearchClient(string Lastname)
         {
             List<Client> clients = new List<Client>();

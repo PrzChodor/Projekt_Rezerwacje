@@ -13,17 +13,18 @@ namespace Projekt_Rezerwacje.DAL.Repositories
     class ReservationRepository
     {
         private const string ADD_RESERVATION = "INSERT INTO `rezerwacje`(`id_k`, `od`, `do`) VALUES ";
-        private const string ADD_RESERVATION_ROOM = "INSERT INTO `pokoje_rezerwacje`(`id_r`, `id_p`) VALUES ";
+        private const string ADD_RESERVATION_ROOM = "INSERT INTO `pokoje_rezerwacje`(`id_r`, `id_p`) VALUES "; 
+        private const string ROOM_RESERVATIONS = "SELECT * FROM rezerwacje, klienci, pokoje_rezerwacje WHERE " +
+            "rezerwacje.id_k = klienci.id_k AND rezerwacje.id_r = pokoje_rezerwacje.id_r AND pokoje_rezerwacje.id_p =";
 
+        //Zwraca wszystkie rezerwacje danego pokoju
         public static List<Reservation> GetReservations(int id_p)
         {
-            string ROOM_RESERVATIONS = "SELECT * FROM rezerwacje, klienci, pokoje_rezerwacje  " +
-                $"WHERE rezerwacje.id_k = klienci.id_k AND rezerwacje.id_r = pokoje_rezerwacje.id_r AND pokoje_rezerwacje.id_p = {id_p}";
 
             List<Reservation> reservations = new List<Reservation>();
             using (var connection = DBConnection.Instance.Connection)
             {
-                MySqlCommand command = new MySqlCommand(ROOM_RESERVATIONS, connection);
+                MySqlCommand command = new MySqlCommand($"{ROOM_RESERVATIONS} {id_p}", connection);
                 connection.Open();
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -33,6 +34,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             return reservations;
         }
 
+        //Usuwa rezerwację o podanym id
         public static bool DeleteReservation(int reservationID)
         {
             bool state = false;
@@ -49,10 +51,12 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             return state;
         }
 
+        //Dodaje rezerwację do bazy danych i sprawdza czy nie koliduje z innymi
         public static bool AddReservation(Reservation reservation, int id_p)
         {
             bool state = false;
             int n = 0;
+            //Wybranie rezerwacji kolidujących z dodawaną
             using (var connection = DBConnection.Instance.Connection)
             {
                 string DATES_IN_RANGE = $"SELECT COUNT(*) FROM rezerwacje, pokoje_rezerwacje WHERE " +
@@ -66,13 +70,13 @@ namespace Projekt_Rezerwacje.DAL.Repositories
                 n = int.Parse(command.ExecuteScalar().ToString());
                 connection.Close();
             }
-
+            //Sprawdzenie czy są jakieś rezerwację kolidujące z dodawaną
             if (n > 0)
             {
                 MessageBox.Show("W tych dniach pokój jest zajęty!");
                 return false;
             }
-
+            //Dodanie rezerwacji do tabeli rezerwację
             using (var connection = DBConnection.Instance.Connection)
             {
                 MySqlCommand command = new MySqlCommand($"{ADD_RESERVATION} {reservation.ToInsert()}", connection);
@@ -81,6 +85,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
                 reservation.ID = (int)command.LastInsertedId;
                 connection.Close();
             }
+            //Dodanie rezerwacji do tableli pokoje_rezerwacje 
             using (var connection = DBConnection.Instance.Connection)
             {
                 MySqlCommand command = new MySqlCommand($"{ADD_RESERVATION_ROOM} ({reservation.ID}, {id_p})", connection);
@@ -92,6 +97,7 @@ namespace Projekt_Rezerwacje.DAL.Repositories
             return state;
         }
 
+        //Kończenie rezerwacji o podanym id
         public static bool EndReservation(int reservationID)
         {
             bool state = false; 
